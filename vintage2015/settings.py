@@ -22,11 +22,11 @@ TEMPLATE_DIRS = (
 
 STATIC_URL = '/static/2015/'
 
-STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'webContent', 'static', '2015')
+STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'vintage2015', 'webContent', 'static', '2015')
 
 MEDIA_URL = '/uploads/2015/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'webContent', 'uploads', '2015')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'vintage2015', 'webContent', 'uploads', '2015')
 
 
 # Quick-start development settings - unsuitable for production
@@ -81,7 +81,7 @@ WSGI_APPLICATION = 'vintage2015.wsgi.application'
 
 DATABASES = {
     'default': {
-        'NAME': 'bjuvinta_db',
+        'NAME': 'bjuvinta_db_2015',
         'ENGINE': 'mysql.connector.django',
         'USER': 'bjuvinta_django',
         'PASSWORD': 'M~au4G5z.^%]',
