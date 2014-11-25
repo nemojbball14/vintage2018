@@ -1,0 +1,59 @@
+{% extends "picsearch/base.html" %} 
+{% load staticfiles %}
+
+
+
+
+{% block title %}
+	<title>{{ search_info }} - BJU Vintage 2014</title>
+
+
+
+	<meta property="og:image" content="{% static 'img/design/facebook-search-og.jpg' %}"/>
+	<meta property="og:title" content="{{ search_info }} | BJUVintage.com"/>
+
+
+{% endblock %}
+
+{% block body %}
+	<body class="page-id-12">
+{% endblock %}
+
+{% block content %}
+
+<!--  Your code goes here! -->
+<div id="rsltsBg doc">
+	<div id="formWrapper">
+		<form action="{% url 'results' %}" method="get">
+			<input type="search" placeholder="Name, Society, or Major" name="info">
+			<input type="submit" value="go" style="display: none;" />
+			{% if message %}<h2 id="searchInfo">{{ message }}</h2>{% endif %}
+		</form>
+	</div>
+
+
+	<div id="resultsWrapper" class="clearfix content">
+	<ul id="results">
+
+		{% for person in people_list %}
+		<li class="slide"> 
+			{% if person.pic_url == "placeholder" %}
+				<img src="{{ MEDIA_URL }}public/portraits/placeholder.jpg">
+			{% else %}
+				<img src="{{ MEDIA_URL }}public/portraits/{{ person.pic_url }}">
+			{% endif %}
+			<h3>{{ person.name }}</h3>
+			<p>{{ person.classification }}</p>
+			<p>{{ person.major }}</p>
+			<p>{{ person.society }}</p>
+		</li>
+		{% endfor %}
+		</ul>
+	</div>
+	<div id="background-gradient-top"></div>
+	<div id="background-black"></div>
+	<div id="background-gradient-bottom"></div>
+</div>
+
+	
+{% endblock %}

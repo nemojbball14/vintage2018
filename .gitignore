@@ -52,3 +52,7 @@ docs/_build/
 
 # PyBuilder
 target/
+
+#sublime stuff
+*.sublime-project
+*.sublime-workspace
