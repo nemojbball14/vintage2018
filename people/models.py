@@ -33,7 +33,7 @@ def validate_file_extension(value):
 class PeopleFile(models.Model):
 	"""Expects a '.csv' file and attempst to create a Person object out of the rows, then creates an error log.
 		Should be read-only after creation."""
-	f = models.FileField("Upload File", upload_to='picsearch', help_text='must be a .csv file with the following named columns:\
+	f = models.FileField("Upload File", upload_to='people', help_text='must be a .csv file with the following named columns:\
 							name, major, society, classification, port_name', validators=[validate_file_extension,])
 	result_f = models.CharField("Log", max_length=128, blank=True)
 	successful = models.BooleanField("Status")

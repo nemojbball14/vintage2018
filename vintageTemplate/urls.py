@@ -9,7 +9,8 @@ urlpatterns = patterns('',
 	# temporary login url for development. REMEMBER TO REMOVE LOGIN_REQIRED METHOD DECORATORS ON VIEWS!
 	url(r'^login/$', 'django.contrib.auth.views.login'),
 
-    url(r'^', include('picsearch.urls')),
+	url(r'^', include('timeline.urls')),
+    url(r'^', include('people.urls')),
     url(r'^', include('organizations.urls')),
 
     #uncomment the next line to allow admin access
@@ -18,4 +19,4 @@ urlpatterns = patterns('',
     #the static url is for local development only!
 ) #+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-handler404 = 'vintage2015.views.handler404'
+handler404 = 'vintage20xx.views.handler404'

@@ -1,5 +1,5 @@
 from django.db import models
-from picsearch.models import Person
+from people.models import Person
 
 import os
 

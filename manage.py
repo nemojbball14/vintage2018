@@ -3,7 +3,7 @@ import os
 import sys
 
 if __name__ == "__main__":
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "vintage2015.settings")
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "vintage20xx.settings")
 
     from django.core.management import execute_from_command_line
 

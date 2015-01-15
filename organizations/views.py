@@ -5,7 +5,7 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 
 from organizations.models import Organization, OrganizationType, OrganizationPicture, OrganizationSpecial
-from picsearch.models import Person
+from people.models import Person
 
 
 class OrganizationAllView(generic.TemplateView):
@@ -65,7 +65,7 @@ class OrganizationSpecialView(generic.TemplateView):
 
 		#Split the list of people by commas
 		temp = context['org'].people.split(',')
-		#then sort the list (*note: keep in two steps; python quirk*)
+		#then sort the list
 		temp.sort()
 		context['members'] = temp
 

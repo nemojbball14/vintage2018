@@ -10,12 +10,13 @@ from django.contrib.auth.decorators import login_required
 
 import re, operator
 
-from picsearch.models import Person
+from django.conf import settings
+from people.models import Person
 
 
 class SearchView(generic.TemplateView):
 	"""View for the initial search page. Redirects to the results page if the query is valid."""
-	template_name = 'picsearch/search.html'
+	template_name = 'people/search.html'
 
 	def post(self, request, *args, **kwargs):
 		info = self.request.POST.get('info','').strip()
@@ -40,7 +41,7 @@ class SearchView(generic.TemplateView):
 
 class ResultsView(generic.TemplateView):
 	"""Shows the results for the current query."""
-	template_name = 'picsearch/results.html'
+	template_name = 'people/results.html'
 	
 	def post(self, request, *args, **kwargs):
 		context = self.get_context_data(**kwargs)
@@ -53,8 +54,8 @@ class ResultsView(generic.TemplateView):
 
 		context['search_info'] = info
 
-		if info.lower() == "farley barnhardt":
-			info = "Alpha Omega Delta"
+		#Change society mascot names to their Greek
+		info = settings.ALIASES.get(info.lower(), info)
 		
 		#check the search string for at least 3 consecutive letters
 		if re.search('[\w ]{3}', info):
@@ -99,7 +100,7 @@ class ResultsView(generic.TemplateView):
 
 class PersonView(generic.TemplateView):
 	"""Uses the results page to show one person. Redirects to 404 if invalid name slug is used."""
-	template_name = 'picsearch/results.html'
+	template_name = 'people/results.html'
 
 	def get_context_data(self, **kwargs):
 		context = super(PersonView, self).get_context_data(**kwargs)
@@ -113,13 +114,3 @@ class PersonView(generic.TemplateView):
 	@method_decorator(login_required)
 	def dispatch(self, *args, **kwargs):
 		return super(PersonView, self).dispatch(*args, **kwargs)
-
-
-#Temporary class override for login
-class HomeView(generic.TemplateView):
-	template_name = 'picsearch/home.html'
-
-	#Remove after development finished
-	@method_decorator(login_required)
-	def dispatch(self, *args, **kwargs):
-		return super(HomeView, self).dispatch(*args, **kwargs)

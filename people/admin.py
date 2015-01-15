@@ -1,5 +1,5 @@
 from django.contrib import admin
-from picsearch.models import Person, PeopleFile
+from people.models import Person, PeopleFile
 
 
 def TypoFixer(modeladmin, request, queryset):

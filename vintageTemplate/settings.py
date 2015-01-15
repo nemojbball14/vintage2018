@@ -1,5 +1,5 @@
 """
-Django settings for vintage2015 project.
+Django settings for vintage20xx project.
 
 For more information on this file, see
 https://docs.djangoproject.com/en/1.6/topics/settings/
@@ -20,20 +20,20 @@ TEMPLATE_DIRS = (
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
-STATIC_URL = '/static/2015/'
+STATIC_URL = '/static/20xx/'
 
-STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'vintage2015', 'webContent', 'static', '2015')
+STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'vintage20xx', 'webContent', 'static', '20xx')
 
-MEDIA_URL = '/uploads/2015/'
+MEDIA_URL = '/uploads/20xx/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'vintage2015', 'webContent', 'uploads', '2015')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'vintage20xx', 'webContent', 'uploads', '20xx')
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'l@ulbf7#6+9%ve&*n*^x)-ujlc30s1fo0l%&4ibh$3shp=06h^'
+SECRET_KEY = 'replace this'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -57,7 +57,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'picsearch',
+    'timeline',
+    'people',
     'organizations',
     'south',
 )
@@ -71,9 +72,9 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'vintage2015.urls'
+ROOT_URLCONF = 'vintage20xx.urls'
 
-WSGI_APPLICATION = 'vintage2015.wsgi.application'
+WSGI_APPLICATION = 'vintage20xx.wsgi.application'
 
 
 # Database
@@ -81,7 +82,7 @@ WSGI_APPLICATION = 'vintage2015.wsgi.application'
 
 DATABASES = {
     'default': {
-        'NAME': 'bjuvinta_db_2015',
+        'NAME': 'bjuvinta_db_20xx',
         'ENGINE': 'mysql.connector.django',
         'USER': 'bjuvinta_django',
         'PASSWORD': 'M~au4G5z.^%]',
@@ -101,7 +102,7 @@ SOUTH_DATABASE_ADAPTERS = { 'default' : 'south.db.mysql' }
 # }
 
 # uncomment to allow login stuff
-LOGIN_URL = '/2015/login/'
+LOGIN_URL = '/20xx/login/'
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
@@ -116,3 +117,46 @@ USE_L10N = True
 
 USE_TZ = True
 
+# Mapping of society mascots to their Greek
+ALIASES = {
+    "eagles" : "Alpha Gamma Tau", #"Basilean"
+    "ambassadors" : "Alpha Sigma Omicron",
+    "bear cubs" : "Beta Chi Omega",
+    "cardinals" : "Beta Epsilon Chi",
+    "bobcats" : "Chi Epsilon Sigma",
+    "dragons" : "Chi Kappa Delta",
+    "sailors" : "Chi Sigma Phi",
+    "gators" : "Chi Theta Upsilon",
+    "flames" : "Nu Alpha Phi",
+    "classics" : "Pi Delta Chi",
+    "firebirds" : "Sigma Kappa Rho",
+    "duskie birds" : "Sigma Lambda Delta",
+    "kangaroos" : "Tau Delta Chi",
+    "owls" : "Theta Alpha Chi",
+    "tigers" : "Theta Delta Omicron",
+    "bandits" : "Theta Mu Theta",
+    "mustangs" : "Theta Pi Delta",
+    "colts" : "Theta Sigma Chi",
+    "pirtates" : "Tri Epsilon",
+    "seagulls" : "Zeta Tau Omega",
+    "wildcats" : "Zoe Aletheia",
+    "lions" : "Alpha Omega Delta",
+    "farley barnhardt" : "Alpha Omega Delta",
+    "razorbacks" : "Alpha Theta Pi",
+    "patriots" : "Beta Gamma Delta",
+    "bears" : "Bryan",
+    "cavaliers" : "Chi Alpha Pi",
+    "wolves" : "Chi Epsilon Delta",
+    "tornadoes" : "Epsilon Zeta Chi",
+    "knights" : "Kappa Sigma Chi",
+    "stallions" : "Kappa Theta Chi",
+    "falcons" : "Lanier",
+    "vikings" : "Nu Delta Chi",
+    "bulldogs" : "Phi Beta Chi",
+    "rams" : "Phi Kappa Pi",
+    "royals" : "Pi Gamma Delta",
+    "cobras" : "Pi Kappa Sigma",
+    "spartans" : "Sigma Alpha Chi",
+    "panthers" : "Theta Kappa Nu",
+    "hawks" : "Zeta Alpha Pi",
+}
