@@ -18,7 +18,9 @@ class Person(models.Model):
 	classification = models.CharField(max_length=50, blank=True, help_text="Put faculty/staff/ga here as well as Fr/So/Jr/Sr")
 	major = models.CharField(max_length=50, blank=True, help_text="Leave empty if not in a major.")
 	society = models.CharField(max_length=50, blank=True, help_text="Put department here if faculty/staff")
-	pic_url = models.CharField("Port_name", max_length=128, help_text="Put just the name of the image (no file path info).")
+	pic_url = models.CharField("Port_name", max_length=128, help_text="Put just the name of the image (no file path info).",\
+					validators=[validate_pic_extension,])
+	
 	
 	def __unicode__(self):
 		return self.name
