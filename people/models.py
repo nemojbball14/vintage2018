@@ -6,6 +6,10 @@ from csv import DictReader as csvrd
 from datetime import datetime
 import os, slugify, re
 
+def validate_pic_extension(value):
+	"""Checks if the picture format is '.jpg'"""
+	if not value.name.endswith(".jpg"):
+		raise ValidationError("Wrong Picture Format. Use .jpg")
 
 class Person(models.Model):
 	"""Holds all the information for one Person."""
