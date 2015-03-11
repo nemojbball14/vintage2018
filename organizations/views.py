@@ -43,7 +43,7 @@ class OrganizationView(generic.TemplateView):
 	
 		context['org'] = get_object_or_404(Organization, slug=self.kwargs['name_slug'], org_type=the_type)
 
-		#if the organization is a society, pull the people automatically
+		# if the organization is a society, pull the people automatically
 		if the_type.slug in ("mens-societies","womens-societies"):
 			context['people'] = Person.objects.filter(society=context['org'])
 
@@ -63,9 +63,9 @@ class OrganizationSpecialView(generic.TemplateView):
 		context = super(OrganizationSpecialView, self).get_context_data(**kwargs)	
 		context['org'] = get_object_or_404(OrganizationSpecial, slug=self.kwargs['special_slug'])
 
-		#Split the list of people by commas
+		# split the list of people by commas
 		temp = context['org'].people.split(',')
-		#then sort the list
+		# then sort the list
 		temp.sort()
 		context['members'] = temp
 

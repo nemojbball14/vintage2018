@@ -44,6 +44,7 @@ ALLOWED_HOSTS = [
     'bjuvintage.com',
     'www.bjuvintage.com',
 ]
+# for local development:
 # ALLOWED_HOSTS = ['localhost',]
 
 
@@ -94,6 +95,7 @@ DATABASES = {
 
 SOUTH_DATABASE_ADAPTERS = { 'default' : 'south.db.mysql' }
 
+# for local development:
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.sqlite3',
@@ -117,7 +119,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-# Mapping of society mascots to their Greek
+# mapping of society mascots to their Greek
 ALIASES = {
     "eagles" : "Alpha Gamma Tau", #"Basilean"
     "ambassadors" : "Alpha Sigma Omicron",

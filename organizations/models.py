@@ -17,7 +17,7 @@ class OrganizationType(models.Model):
 
 
 class Organization(models.Model):
-	"""A Specific Organization."""
+	"""A specific Organization with a type."""
 	org_type = models.ForeignKey(OrganizationType, verbose_name="Organization Type")
 	name = models.CharField(max_length=50)
 	people = models.ManyToManyField(Person, verbose_name="Members", blank=True)
@@ -27,7 +27,7 @@ class Organization(models.Model):
 		return self.name
 
 	class Meta:
-		#only one Organization of the same name per OrganiztionType
+		# only one Organization of the same name per OrganiztionType
 		unique_together = (('org_type','name'))
 		ordering = ['name']
 

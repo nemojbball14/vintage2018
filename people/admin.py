@@ -3,10 +3,10 @@ from people.models import Person, PeopleFile
 
 
 def TypoFixer(modeladmin, request, queryset):
-	#Use this function to mass edit a typo. Just be sure to only apply it to the correct people!
-	#Change the value inside 'update' to whatever needs to be changed.
-	#Uncomment the 'action' line below in PersonAdmin to enable. (I also recommend you disable it
-	# after the typo is fixed.)
+	"""Use this function to mass edit a typo. Just be sure to only apply it to the correct people!
+		Change the value inside 'update' to whatever needs to be changed.
+		Uncomment the 'action' line below in PersonAdmin to enable. (I also recommend you disable it
+		after the typo is fixed.)"""
 	queryset.update(classification="Sophomore")
 
 
@@ -16,7 +16,7 @@ class PersonAdmin(admin.ModelAdmin):
 	fields = ('name', 'name_slug','classification', 'major', 'society', 'pic_url',)
 	list_filter = ['classification', 'major', 'society']
 	ordering = ('name',)
-	#actions = [TypoFixer,]
+	# actions = [TypoFixer,]
 
 
 class PeopleFileAdmin(admin.ModelAdmin):

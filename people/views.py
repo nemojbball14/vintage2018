@@ -22,9 +22,11 @@ class SearchView(generic.TemplateView):
 		info = self.request.POST.get('info','').strip()
 		context = self.get_context_data(**kwargs)
 
-		#check the search string for at least 3 consecutive letters
+		# check the search string for at least 3 consecutive letters
 		if re.search('[\w ]{3}', info):
+			# ensure there are no special characters
 			if not re.search('[^a-zA-Z .]', info):
+				# the query is ok, so redirect to results
 				return HttpResponseRedirect(reverse('results')+'?info='+info)
 			else:
 				context['message'] = 'Invalid search. Please use only letters, spaces, and periods.'
@@ -54,35 +56,41 @@ class ResultsView(generic.TemplateView):
 
 		context['search_info'] = info
 
-		#Change society mascot names to their Greek
+		# change society mascot names to their Greek
 		info = settings.ALIASES.get(info.lower(), info)
 		
-		#check the search string for at least 3 consecutive letters
+		# check the search string for at least 3 consecutive letters
 		if re.search('[\w ]{3}', info):
+			# ensure there are no special characters
 			if not re.search('[^a-zA-Z .]', info): 
 				
-				#find all the people that have info containing the string
+				# find all the people that have info containing the string
 				people = Person.objects.filter(name__icontains=info) | \
 					     Person.objects.filter(society__icontains=info) | \
 					     Person.objects.filter(major__icontains=info)
 
-				#if there are at least two pieces, split them apart and look for all independently
 				info_chunks = info.split()
+				# check if there are at least two pieces
 				if len(info_chunks) > 1:
-					query1 = [Q(name__icontains=x) for x in info_chunks]
-					query2 = [Q(society__icontains=x) for x in info_chunks]
-					query3 = [Q(major__icontains=x) for x in info_chunks]
+					# query for each piece individually
+					query_name    = [Q(name__icontains=x) for x in info_chunks]
+					query_society = [Q(society__icontains=x) for x in info_chunks]
+					query_major   = [Q(major__icontains=x) for x in info_chunks]
 
-					people |= Person.objects.filter(reduce(operator.and_, query1)) | \
-							  Person.objects.filter(reduce(operator.and_, query2)) | \
-							  Person.objects.filter(reduce(operator.and_, query3))
+					# add the people that have all the pieces
+					# (this differs from the previous list because it doesn't care about the order of the pieces
+					#  or whether the pieces are sequential)
+					people |= Person.objects.filter(reduce(operator.and_, query_name)) | \
+							  Person.objects.filter(reduce(operator.and_, query_society)) | \
+							  Person.objects.filter(reduce(operator.and_, query_major))
 
-				count = len(people)
+				num_people_matched = len(people)
 
 				context['people_list'] = people
 
-				if count != 1:
-					context['message'] = '{} results found for \"{}.\"'.format(count, info)
+				# send the appropriate results message
+				if num_people_matched != 1:
+					context['message'] = '{} results found for \"{}.\"'.format(num_people_matched, info)
 				else:
 					context['message'] = '1 result found for \"{}.\"'.format(info)
 

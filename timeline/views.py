@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 
 
 class HomeView(generic.TemplateView):
+	"""Shows the timeline template."""
 	template_name = 'timeline/home.html'
 
 	#Remove after development finished
