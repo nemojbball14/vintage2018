@@ -6,3 +6,4 @@ vintageTemplate
 	-Pillow >=2.3
 	-unicode-slugify
 	-south >= 0.8.4
+	-mysql-connector-django >= 1.2.2
