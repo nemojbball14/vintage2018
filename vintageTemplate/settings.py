@@ -22,11 +22,11 @@ TEMPLATE_DIRS = (
 
 STATIC_URL = '/static/20xx/'
 
-STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'vintage20xx', 'webContent', 'static', '20xx')
+STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'webContent', 'static', '20xx')
 
 MEDIA_URL = '/uploads/20xx/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'vintage20xx', 'webContent', 'uploads', '20xx')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'webContent', 'uploads', '20xx')
 
 
 # Quick-start development settings - unsuitable for production
