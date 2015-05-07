@@ -6,18 +6,18 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-	# temporary login url for development. REMEMBER TO REMOVE LOGIN_REQIRED METHOD DECORATORS ON VIEWS IN FINAL PRODUCT!
-	url(r'^login/$', 'django.contrib.auth.views.login'),
+    # Temporary login url for development. REMEMBER TO REMOVE LOGIN_REQIRED METHOD DECORATORS ON VIEWS!
+    # url(r'^login/$', 'django.contrib.auth.views.login'),
 
-	url(r'^', include('timeline.urls')),
+    url(r'^', include('timeline.urls')),
     url(r'^', include('people.urls')),
     url(r'^', include('organizations.urls')),
+    url(r'^', include('articles.urls')),
 
-    # uncomment the next line to allow admin access. Comment out in final product.
+    # Uncomment the next line to allow admin access
     url(r'^admin/', include(admin.site.urls)),
     
-    # the static url is for local development only!
+    # The static url is for local development only!
 ) #+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-# use our custum 404 page
 handler404 = 'vintage20xx.views.handler404'

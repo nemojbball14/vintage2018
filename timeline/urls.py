@@ -1,7 +1,7 @@
 from django.conf.urls import patterns, url
-from django.views.generic import ListView
-from timeline.views import HomeView
+from timeline.views import HomeView, WideSearchView
 
 urlpatterns = patterns('',
     url(r'^$', HomeView.as_view(), name='home'),
+    url(r'^search/$', WideSearchView.as_view(), name='wide_search'),
 )

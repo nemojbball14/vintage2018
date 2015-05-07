@@ -1,6 +1,4 @@
 from django.conf.urls import patterns, url
-from django.views.generic import ListView
-from organizations.models import Organization, OrganizationType
 from organizations.views import OrganizationView, OrganizationAllView, OrganizationSpecialView
 
 urlpatterns = patterns('',

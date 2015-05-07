@@ -1,0 +1,207 @@
+{% extends "timeline/base.html" %}
+
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    {% block title %}
+    <title>BJU Vintage 2015</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:title" content="Vintage 2015: Valley of Vision"/>
+    <meta property="og:image" content="http://bjuvintage.com/static/2015/images/fb-img.jpg"/>
+    <meta property="og:site_name" content="BJUVintage.com"/>
+    <meta property="og:description" content="Bob Jones University presents the 2015 Vintage."/>
+
+    <link href="{% static 'styles/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'styles/font-awesome.min.css' %}" rel="stylesheet">
+    <link href="{% static 'styles/fonts.css' %}" rel="stylesheet">
+    <link href="{% static 'styles/global.css' %}" rel="stylesheet">
+    <link href="{% static 'styles/search.css' %}" rel="stylesheet">
+    <!-- AJAX SEARCH STYLE -->
+    <link href="{% static 'ajax_search/css/ajax_search.css' %}" rel="stylesheet"  />
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-49288865-3', 'auto');
+  ga('send', 'pageview');
+
+</script>
+    {% endblock %}
+</head>
+
+{% block body %}
+<body id="search">
+{% endblock %}
+    
+    {% block content %}
+    <script type="text/javascript"> 
+
+        function stopRKey(evt) { 
+          var evt = (evt) ? evt : ((event) ? event : null); 
+          var node = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null); 
+          if ((evt.keyCode == 13) && (node.type=="text"))  {return false;} 
+        } 
+
+        document.onkeypress = stopRKey; 
+
+    </script>
+    
+        <div id="search-bg"></div>
+        
+        <div class="wrapper clearfix">
+            <div class="container">
+                <header class="search-input">
+                    <form class="searchfield" method="get" autocomplete="off" autofocus>{% csrf_token %}
+                        {{ SearchForm.instant_q }}
+                    </form>
+                    {% if message %}<h2 id="searchInfo">{{ message }}</h2>{% endif %}
+                </header>
+
+                <section class="search-results"></section>
+            </div>
+        </div>
+
+        {% verbatim %}
+        <script id="search-results-template" type="text/x-handlebars-template">
+            <div class="column col-sm-4">
+                {{#if people}}
+                    <label>People</label>
+                    <ul class="people">
+                        {{#each people}}
+                        <li>
+                            <a href="{{ this.url }}"><img src="/uploads/2015/public/portraits/{{ this.thumbnail }}"></a>
+                            <a href="{{ this.url }}"><h5>{{ this.first }} {{ this.last }}</h5></a>
+                            {{#if this.classification}}
+                                <span>{{ this.classification }}</span>
+                            {{/if}}
+                            {{#if this.major}}
+                                <span>{{ this.major }}</span>
+                            {{/if}}
+                        </li>
+                        {{/each}}
+                    </ul>
+                    <a href="/2015/{{ view_link }}" class="block-link">View all {{ people_count }} results <i class="glyphicon glyphicon-chevron-right"></i></a>
+                {{/if}}
+            </div>
+            <div class="column col-sm-8">
+                {{#if organization}}
+                    <label>Groups</label>
+                    <ul class="groups">
+                        {{#each organization}}
+                        <li>
+                            <a href="{{ this.url }}"><img src="{{ this.thumbnail }}"></a>
+                            <a href="{{ this.url }}"><h4>{{ this.name }}</h4></a>
+                            <p>{{dotdotdot this.description }}</p>
+                            <a href="{{ this.url }}" class="block-link">View Group <i class="glyphicon glyphicon-chevron-right"></i></a>
+                        </li>
+                        {{/each}}
+                    </ul>
+                {{/if}}
+            </div>
+        </script>
+        {% endverbatim %}
+    <script src="{% static 'scripts/jquery-2.1.3.min.js' %}"></script>
+    <script src="{% static 'scripts/bootstrap.min.js' %}"></script>
+    <script src="{% static 'scripts/handlebars.min.js' %}"></script>
+    <script src="{% static 'scripts/jquery.placeholder.min.js' %}"></script>
+      <script type="text/javascript">
+            var pathname = window.location.origin+"/2015/instant_all_search"; 
+            var request; 
+            var json;
+
+            //Cross Site Forgery Request Protection Methods used to allow POST methods to be sent to Django
+            function getCookie(name) {
+                var cookieValue = null;
+                if (document.cookie && document.cookie != '') {
+                    var cookies = document.cookie.split(';');
+                    for (var i = 0; i < cookies.length; i++) {
+                        var cookie = jQuery.trim(cookies[i]);
+                        // Does this cookie string begin with the name we want?
+                        if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                            break;
+                        }
+                    }
+                }
+                return cookieValue;
+            }
+            var csrftoken = getCookie('csrftoken');
+
+            function csrfSafeMethod(method) {
+                // these HTTP methods do not require CSRF protection
+                return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+            }
+
+            var handlebarsContent = {
+          renderData: function(data){
+            var source   = $('#search-results-template').html();
+                    var template = Handlebars.compile(source);
+                    var render = template(data);
+                    console.log(data)
+            
+            $('.search-results').html(render);
+          }
+            };
+
+            Handlebars.registerHelper('dotdotdot', function(str) {
+              if (str.length > 80)
+                return str.substring(0,80) + '...';
+              return str;
+            });
+
+            $(document).ready(function(){
+
+                $.ajaxSetup({
+                    beforeSend: function(xhr, settings) {
+                        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                        }
+                    }
+                });
+
+                $("#ajaxsearch").keyup(function() {
+                    if (request){
+                        request.abort();
+                    }
+                    //if ($("#ajaxsearch").val()) {
+                    request= $.post(pathname, { 
+                            query: $("#ajaxsearch").val() 
+                            }, function(data) {
+                                json = data; // delete
+                                handlebarsContent.renderData(data);
+                            }
+                        );
+                //}
+                });
+
+                $(function() {
+                     $('input, textarea').placeholder();
+                });
+
+            });
+        </script>
+    {% endblock %}
+    {% block footer %}
+
+      <footer class="share-footer clearfix">
+      <h1>Share this page</h1>
+
+      <a target="_blank" href="https://twitter.com/home?status=Check%20out%20the%20search%20page%20for%20BJUVintage%202015!:%20http://bjuvintage.com/2015/search" class="block-link tw-color"><i class="fa fa-twitter"></i><span> Twitter</span></a>
+      
+      <a target="_blank" href="https://www.facebook.com/dialog/feed?app_id=694165360698061&amp;link=http://bjuvintage.com/2015/search&amp;name=Check%20out%20the%20search%20page%20for%20BJUVintage%202015!&amp;redirect_uri=http%3A%2F%2Fwww.facebook.com%2F" class="block-link fb-color"><i class="fa fa-facebook"></i><span> Facebook</span></a>
+      
+      <a target="_blank" href="https://plus.google.com/share?url=http://bjuvintage.com/2015/search" class="block-link gp-color"><i class="fa fa-google-plus"></i><span> Google+</span></a>
+
+    </footer>
+
+    {% endblock %}
+</body>
+
+</html>
+

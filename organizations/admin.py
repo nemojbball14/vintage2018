@@ -3,35 +3,35 @@ from organizations.models import Organization, OrganizationType, OrganizationPic
 
 
 class OrganizationTypeAdmin(admin.ModelAdmin):
-	prepopulated_fields = {"slug": ("name",)} 
-	list_display = ('name',)
-	fields = ('name', 'slug')
+    prepopulated_fields = {"slug": ("name",)} 
+    list_display = ('name',)
+    fields = ('name', 'slug')
 
 
 class OrganizationAdmin(admin.ModelAdmin):
-	prepopulated_fields = {"slug": ("name",)} 
-	list_display = ('name',)
-	fields = ('org_type', 'name', 'slug', 'people',)
-	list_filter = ['org_type',]
-	filter_horizontal = ('people',)
+    prepopulated_fields = {"slug": ("name",)}
+    list_display = ('name',)
+    fields = ('org_type', 'name', 'intro', 'paragraph', 'slug', 'people', 'thumb_nail')
+    list_filter = ['org_type',]
+    filter_horizontal = ('people',)
 
 
 class OrganizationPictureAdmin(admin.ModelAdmin):
-	list_display = ('org', 'pic',)
-	fields = ('org', 'pic',)
-	list_filter = ['org',]
+    list_display = ('org', 'pic',)
+    fields = ('org', 'pic',)
+    list_filter = ['org',]
 
 
 class OrganizationSpecialAdmin(admin.ModelAdmin):
-	prepopulated_fields = {"slug": ("name",)} 
-	list_display = ('name',)
-	fields = ('name', 'slug', 'people',)
+    prepopulated_fields = {"slug": ("name",)} 
+    list_display = ('name',)
+    fields = ('name', 'slug', 'people',)
 
 
 class OrganizationSpecialPictureAdmin(admin.ModelAdmin):
-	list_display = ('org', 'pic',)
-	fields = ('org', 'pic',)
-	list_filter = ['org',]
+    list_display = ('org', 'pic',)
+    fields = ('org', 'pic',)
+    list_filter = ['org',]
 
 
 admin.site.register(OrganizationType, OrganizationTypeAdmin)
