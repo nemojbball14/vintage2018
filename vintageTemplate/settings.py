@@ -1,5 +1,5 @@
 """
-Django settings for vintage20xx project.
+Django settings for vintage2018 project.
 
 For more information on this file, see
 https://docs.djangoproject.com/en/1.6/topics/settings/
@@ -20,13 +20,13 @@ TEMPLATE_DIRS = (
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
-STATIC_URL = '/static/20xx/'
+STATIC_URL = '/static/2018/'
 
-STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'webContent', 'static', '20xx')
+STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'webContent', 'static', '2018')
 
-MEDIA_URL = '/uploads/20xx/'
+MEDIA_URL = '/uploads/2018/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'webContent', 'uploads', '20xx')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'webContent', 'uploads', '2018')
 
 
 # Quick-start development settings - unsuitable for production
@@ -74,9 +74,9 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'vintage20xx.urls'
+ROOT_URLCONF = 'vintage2018.urls'
 
-WSGI_APPLICATION = 'vintage20xx.wsgi.application'
+WSGI_APPLICATION = 'vintage2018.wsgi.application'
 
 
 # Database
@@ -84,7 +84,7 @@ WSGI_APPLICATION = 'vintage20xx.wsgi.application'
 
 DATABASES = {
     'default': {
-        'NAME': 'bjuvinta_db_20xx',
+        'NAME': 'bjuvinta_db_2018',
         'ENGINE': 'mysql.connector.django',
         'USER': 'bjuvinta_django',
         'PASSWORD': 'M~au4G5z.^%]',
@@ -105,7 +105,7 @@ SOUTH_DATABASE_ADAPTERS = { 'default' : 'south.db.mysql' }
 # }
 
 # uncomment to allow login stuff
-LOGIN_URL = '/20xx/login/'
+LOGIN_URL = '/2018/login/'
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/

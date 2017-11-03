@@ -20,4 +20,4 @@ urlpatterns = patterns('',
     # The static url is for local development only!
 ) #+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-handler404 = 'vintage20xx.views.handler404'
+handler404 = 'vintage2018.views.handler404'
